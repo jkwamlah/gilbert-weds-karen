@@ -5,11 +5,13 @@ import { Countdown } from "./Countdown";
 const heroImage = "/assets/images/hand-in-hand.jpeg";
 
 interface HeroProps {
-  onRsvp: () => void;
+  onCopyZoomDetails: () => void;
   onGift: () => void;
+  onJoinZoom: () => void;
+  zoomActive: boolean;
 }
 
-export function Hero({ onRsvp, onGift }: HeroProps) {
+export function Hero({ onCopyZoomDetails, onGift, onJoinZoom, zoomActive }: HeroProps) {
   return (
     <section id="hero" className="relative isolate overflow-hidden">
       <Image
@@ -64,10 +66,17 @@ export function Hero({ onRsvp, onGift }: HeroProps) {
           style={{ animationDelay: "440ms" }}
         >
           <button
-            onClick={onRsvp}
-            className="rounded-full bg-burnt px-7 py-3 text-xs uppercase tracking-[0.25em] text-ivory shadow-sm transition hover:-translate-y-0.5 hover:bg-burnt/90"
+            onClick={onJoinZoom}
+            disabled={!zoomActive}
+            className="rounded-full bg-burnt px-7 py-3 text-xs uppercase tracking-[0.25em] text-ivory shadow-sm transition enabled:hover:-translate-y-0.5 enabled:hover:bg-burnt/90 disabled:cursor-not-allowed disabled:opacity-50 lg:hidden"
           >
-            RSVP
+            Join on Zoom
+          </button>
+          <button
+            onClick={onCopyZoomDetails}
+            className="hidden rounded-full bg-burnt px-7 py-3 text-xs uppercase tracking-[0.25em] text-ivory shadow-sm transition hover:-translate-y-0.5 hover:bg-burnt/90 lg:inline-flex"
+          >
+            Copy Zoom Details
           </button>
           <a
             href="#program"

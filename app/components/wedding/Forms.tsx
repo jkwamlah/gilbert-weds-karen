@@ -18,57 +18,6 @@ interface ContactModalProps extends ModalProps {
   recipient: ContactRecipient | null;
 }
 
-export function RsvpModal({ open, onOpenChange }: ModalProps) {
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    showToast("Thank you! Your RSVP has been received.");
-    onOpenChange(false);
-  };
-  return (
-    <ResponsiveModal
-      open={open}
-      onOpenChange={onOpenChange}
-      title="Kindly Respond"
-      description="We're saving a seat with your name on it."
-    >
-      <form onSubmit={onSubmit} className="space-y-5">
-        <div>
-          <label className={labelCls}>Full Name</label>
-          <input required className={inputCls} placeholder="Your full name" />
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            <label className={labelCls}>Email</label>
-            <input type="email" required className={inputCls} placeholder="you@email.com" />
-          </div>
-          <div>
-            <label className={labelCls}>Guests</label>
-            <select className={inputCls} defaultValue="1">
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label className={labelCls}>Attending</label>
-          <div className="flex gap-3">
-            {["Joyfully accepts", "Regretfully declines"].map((o) => (
-              <label key={o} className="flex flex-1 cursor-pointer items-center gap-2 rounded-xl border border-sage/30 bg-ivory px-4 py-3 text-sm has-[:checked]:border-burnt has-[:checked]:bg-blush-soft/60">
-                <input type="radio" name="attending" defaultChecked={o.startsWith("Joy")} className="accent-burnt" />
-                {o}
-              </label>
-            ))}
-          </div>
-        </div>
-        <div>
-          <label className={labelCls}>Note for the couple (optional)</label>
-          <textarea rows={3} className={inputCls} placeholder="A kind word..." />
-        </div>
-        <button type="submit" className={btnCls}>Send RSVP</button>
-      </form>
-    </ResponsiveModal>
-  );
-}
-
 export function ContactModal({ open, onOpenChange, recipient }: ContactModalProps) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 

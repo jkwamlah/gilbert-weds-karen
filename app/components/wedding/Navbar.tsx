@@ -10,7 +10,17 @@ const links = [
   { id: "contact", label: "Contact" },
 ];
 
-export function Navbar({ onRsvp }: { onRsvp: () => void }) {
+interface NavbarProps {
+  onJoinZoom: () => void;
+  zoomActive: boolean;
+}
+
+const zoomButtonClassName = [
+  "rounded-full bg-burnt px-5 py-2.5 text-[12px] uppercase tracking-[0.2em] text-ivory transition",
+  "enabled:hover:bg-burnt/90 disabled:cursor-not-allowed disabled:opacity-50",
+].join(" ");
+
+export function Navbar({ onJoinZoom, zoomActive }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("hero");
@@ -85,10 +95,11 @@ export function Navbar({ onRsvp }: { onRsvp: () => void }) {
 
         <div className="hidden lg:block">
           <button
-            onClick={onRsvp}
-            className="rounded-full bg-burnt px-5 py-2.5 text-[12px] uppercase tracking-[0.2em] text-ivory transition hover:bg-burnt/90"
+            onClick={onJoinZoom}
+            disabled={!zoomActive}
+            className={zoomButtonClassName}
           >
-            RSVP
+            Join on Zoom
           </button>
         </div>
 
@@ -116,11 +127,12 @@ export function Navbar({ onRsvp }: { onRsvp: () => void }) {
             <button
               onClick={() => {
                 setOpen(false);
-                onRsvp();
+                onJoinZoom();
               }}
-              className="mt-2 rounded-full bg-burnt px-5 py-3 text-xs uppercase tracking-[0.2em] text-ivory"
+              disabled={!zoomActive}
+              className="mt-2 rounded-full bg-burnt px-5 py-3 text-xs uppercase tracking-[0.2em] text-ivory disabled:cursor-not-allowed disabled:opacity-50"
             >
-              RSVP
+              Join on Zoom
             </button>
           </nav>
         </div>
