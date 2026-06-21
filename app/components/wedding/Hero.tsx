@@ -78,18 +78,20 @@ export function Hero({ onCopyZoomDetails, onGift, onJoinZoom, zoomActive }: Hero
           >
             Copy Zoom Details
           </button>
-          <a
-            href="#program"
-            className="rounded-full border border-charcoal/25 bg-ivory/60 px-7 py-3 text-xs uppercase tracking-[0.25em] text-charcoal backdrop-blur transition hover:border-burnt hover:text-burnt"
-          >
-            View Program
-          </a>
-          <button
-            onClick={onGift}
-            className="rounded-full border border-sage/40 bg-sage-soft/40 px-7 py-3 text-xs uppercase tracking-[0.25em] text-charcoal transition hover:border-sage hover:bg-sage-soft/70"
-          >
-            Send Gift
-          </button>
+          <div className="flex w-full flex-nowrap justify-center gap-3 lg:contents">
+            <a
+              href="#program"
+              className="flex-1 rounded-full border border-charcoal/25 bg-ivory/60 px-3 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-charcoal backdrop-blur transition hover:border-burnt hover:text-burnt sm:px-7 sm:text-xs sm:tracking-[0.25em] lg:flex-none"
+            >
+              View Program
+            </a>
+            <button
+              onClick={onGift}
+              className="flex-1 rounded-full border border-sage/40 bg-sage-soft/40 px-3 py-3 text-[10px] uppercase tracking-[0.16em] text-charcoal transition hover:border-sage hover:bg-sage-soft/70 sm:px-7 sm:text-xs sm:tracking-[0.25em] lg:flex-none"
+            >
+              Send Gift
+            </button>
+          </div>
         </div>
       </div>
     </section>

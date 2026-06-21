@@ -68,7 +68,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-ivory text-charcoal">
-      <Navbar onJoinZoom={joinZoom} zoomActive={zoomActive} />
+      <Navbar
+        onCopyZoomDetails={copyZoomDetails}
+        onJoinZoom={joinZoom}
+        zoomActive={zoomActive}
+      />
       <main>
         <Hero
           onCopyZoomDetails={copyZoomDetails}

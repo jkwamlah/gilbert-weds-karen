@@ -58,3 +58,7 @@ export function MapPinIcon(props: IconProps) {
 export function CarIcon(props: IconProps) {
   return <Icon {...props}><path d="m5 17-1 2M19 17l1 2M3 11l2-5h14l2 5v7H3Z" /><circle cx="7" cy="15" r="1" /><circle cx="17" cy="15" r="1" /></Icon>;
 }
+
+export function CopyIcon(props: IconProps) {
+  return <Icon {...props}><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></Icon>;
+}

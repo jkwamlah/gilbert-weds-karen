@@ -114,8 +114,13 @@ export function GiftMessageModal({ open, onOpenChange }: ModalProps) {
           <input required className={inputCls} placeholder="Full name" />
         </div>
         <div>
-          <label className={labelCls}>Message (optional)</label>
-          <textarea rows={4} className={inputCls} placeholder="A blessing for our new home..." />
+          <label className={labelCls}>Message</label>
+          <textarea
+            required
+            rows={4}
+            className={inputCls}
+            placeholder="A blessing for our new home..."
+          />
         </div>
         <button type="submit" className={btnCls}>Send Gift Note</button>
       </form>

@@ -11,6 +11,7 @@ const links = [
 ];
 
 interface NavbarProps {
+  onCopyZoomDetails: () => void;
   onJoinZoom: () => void;
   zoomActive: boolean;
 }
@@ -20,7 +21,7 @@ const zoomButtonClassName = [
   "enabled:hover:bg-burnt/90 disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
 
-export function Navbar({ onJoinZoom, zoomActive }: NavbarProps) {
+export function Navbar({ onCopyZoomDetails, onJoinZoom, zoomActive }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("hero");
@@ -127,12 +128,11 @@ export function Navbar({ onJoinZoom, zoomActive }: NavbarProps) {
             <button
               onClick={() => {
                 setOpen(false);
-                onJoinZoom();
+                onCopyZoomDetails();
               }}
-              disabled={!zoomActive}
-              className="mt-2 rounded-full bg-burnt px-5 py-3 text-xs uppercase tracking-[0.2em] text-ivory disabled:cursor-not-allowed disabled:opacity-50"
+              className="mt-2 rounded-full bg-burnt px-5 py-3 text-xs uppercase tracking-[0.2em] text-ivory"
             >
-              Join on Zoom
+              Copy Zoom Details
             </button>
           </nav>
         </div>
