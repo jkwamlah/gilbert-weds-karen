@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 function diff(target: Date) {
@@ -10,19 +12,20 @@ function diff(target: Date) {
 }
 
 export function Countdown({ iso }: { iso: string }) {
-  const [t, setT] = useState(() => diff(new Date(iso)));
+  const [t, setT] = useState<ReturnType<typeof diff> | null>(null);
 
   useEffect(() => {
     const target = new Date(iso);
+    setT(diff(target));
     const id = setInterval(() => setT(diff(target)), 1000);
     return () => clearInterval(id);
   }, [iso]);
 
   const items = [
-    { label: "Days", value: t.days },
-    { label: "Hours", value: t.hours },
-    { label: "Minutes", shortLabel: "Min", value: t.minutes },
-    { label: "Seconds", shortLabel: "Sec", value: t.seconds },
+    { label: "Days", value: t?.days ?? 0 },
+    { label: "Hours", value: t?.hours ?? 0 },
+    { label: "Minutes", shortLabel: "Min", value: t?.minutes ?? 0 },
+    { label: "Seconds", shortLabel: "Sec", value: t?.seconds ?? 0 },
   ];
 
   return (
@@ -36,7 +39,7 @@ export function Countdown({ iso }: { iso: string }) {
             className="font-serif text-3xl text-charcoal sm:text-5xl"
             suppressHydrationWarning
           >
-            {String(i.value).padStart(2, "0")}
+            {t ? String(i.value).padStart(2, "0") : "--"}
           </div>
           <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-burnt sm:text-xs">
             {i.shortLabel ? (

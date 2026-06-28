@@ -2,7 +2,7 @@ export const couple = {
   bride: "Karen",
   groom: "Gilbert",
   date: "July 03, 2026",
-  dateISO: "2026-07-03T15:00:00",
+  dateISO: "2026-07-03T15:00:00+00:00",
   welcome:
     "With joyful hearts and the blessing of family, we invite you to share in the celebration of our love.",
 };
