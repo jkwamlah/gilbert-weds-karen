@@ -15,7 +15,6 @@ import { Program } from "@/app/components/wedding/Program";
 import { Story } from "@/app/components/wedding/Story";
 import { ToastViewport } from "@/app/components/wedding/Toast";
 import { showToast } from "@/app/components/wedding/Toast";
-import { Venue } from "@/app/components/wedding/Venue";
 
 const zoomUrl = "https://jworg.zoom.us/j/81179031326";
 const zoomDetails = `Join Zoom Meeting
@@ -82,7 +81,6 @@ export default function Home() {
         />
         <Story />
         <Program />
-        <Venue />
         <Gallery />
         <Gift onSendMessage={() => setGiftOpen(true)} />
         <Contact onOpenForm={openContactForm} />

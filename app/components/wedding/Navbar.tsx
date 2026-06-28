@@ -4,7 +4,6 @@ import { MenuIcon, XIcon } from "./Icons";
 const links = [
   { id: "story", label: "Our Story" },
   { id: "program", label: "Program" },
-  { id: "venue", label: "Venue" },
   { id: "gallery", label: "Gallery" },
   { id: "gift", label: "Gift" },
   { id: "contact", label: "Contact" },

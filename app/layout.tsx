@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Karen & Gilbert | A Wedding Celebration",
   description:
-    "Join us as we say forever. View our story, program, venue, and RSVP for our wedding day.",
+    "Join us as we say forever. View our story, program, and RSVP for our wedding day.",
   authors: [{ name: "GILREN" }],
   openGraph: {
     title: "Karen & Gilbert | A Wedding Celebration",
