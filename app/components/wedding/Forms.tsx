@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { CopyIcon } from "./Icons";
 import { ResponsiveModal } from "./ResponsiveModal";
 import { showToast } from "./Toast";
 import type { ContactRecipient } from "./Contact";
@@ -124,6 +125,85 @@ export function GiftMessageModal({ open, onOpenChange }: ModalProps) {
         </div>
         <button type="submit" className={btnCls}>Send Gift Note</button>
       </form>
+    </ResponsiveModal>
+  );
+}
+
+interface ZoomPasscodeModalProps extends ModalProps {
+  meetingPasscode: string;
+  onCopyPasscode: () => Promise<boolean>;
+  onJoinZoom: () => void;
+}
+
+export function ZoomPasscodeModal({
+  open,
+  onOpenChange,
+  meetingPasscode,
+  onCopyPasscode,
+  onJoinZoom,
+}: ZoomPasscodeModalProps) {
+  const [copying, setCopying] = useState(false);
+
+  const copyPasscode = async () => {
+    setCopying(true);
+    const copied = await onCopyPasscode();
+    setCopying(false);
+    return copied;
+  };
+
+  const copyAndJoin = async () => {
+    const copied = await copyPasscode();
+    if (!copied) return;
+
+    onOpenChange(false);
+    onJoinZoom();
+  };
+
+  return (
+    <ResponsiveModal
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Zoom Passcode"
+      description="Copy the meeting passcode before joining the livestream."
+    >
+      <div className="space-y-5">
+        <div className="rounded-2xl border border-sage/25 bg-cream/70 px-5 py-4">
+          <p className={labelCls}>Meeting Passcode</p>
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-serif text-4xl leading-none text-charcoal">
+              {meetingPasscode}
+            </p>
+            <button
+              type="button"
+              onClick={copyPasscode}
+              disabled={copying}
+              aria-label="Copy meeting passcode"
+              className="rounded-full border border-sage/35 bg-ivory p-3 text-charcoal transition hover:border-burnt hover:text-burnt disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <CopyIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+          <button
+            type="button"
+            onClick={copyAndJoin}
+            disabled={copying}
+            className={btnCls}
+          >
+            {copying ? "Copying..." : "Copy & Join Zoom"}
+          </button>
+          <button
+            type="button"
+            onClick={copyPasscode}
+            disabled={copying}
+            className="rounded-full border border-charcoal/20 px-6 py-3 text-xs uppercase tracking-[0.2em] text-charcoal transition hover:border-burnt hover:text-burnt disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Copy Passcode
+          </button>
+        </div>
+      </div>
     </ResponsiveModal>
   );
 }

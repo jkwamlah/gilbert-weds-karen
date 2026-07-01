@@ -6,6 +6,7 @@ import { Contact, type ContactRecipient } from "@/app/components/wedding/Contact
 import {
   ContactModal,
   GiftMessageModal,
+  ZoomPasscodeModal,
 } from "@/app/components/wedding/Forms";
 import { Gallery } from "@/app/components/wedding/Gallery";
 import { Gift } from "@/app/components/wedding/Gift";
@@ -17,17 +18,19 @@ import { ToastViewport } from "@/app/components/wedding/Toast";
 import { showToast } from "@/app/components/wedding/Toast";
 
 const zoomUrl = "https://jworg.zoom.us/j/81179031326";
+const zoomPasscode = "030726";
 const zoomDetails = `Join Zoom Meeting
 ${zoomUrl}
 
 Meeting ID: 811 7903 1326
-Passcode: 030726`;
+Passcode: ${zoomPasscode}`;
 
 export default function Home() {
   const zoomActive = true;
   const [contactOpen, setContactOpen] = useState(false);
   const [contactRecipient, setContactRecipient] = useState<ContactRecipient | null>(null);
   const [giftOpen, setGiftOpen] = useState(false);
+  const [zoomPasscodeOpen, setZoomPasscodeOpen] = useState(false);
 
   const openContactForm = (recipient: ContactRecipient) => {
     setContactRecipient(recipient);
@@ -36,6 +39,21 @@ export default function Home() {
 
   const joinZoom = () => {
     window.open(zoomUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const openZoomPasscodeModal = () => {
+    setZoomPasscodeOpen(true);
+  };
+
+  const copyZoomPasscode = async () => {
+    try {
+      await navigator.clipboard.writeText(zoomPasscode);
+      showToast("Zoom passcode copied.");
+      return true;
+    } catch {
+      showToast("Could not copy Zoom passcode.");
+      return false;
+    }
   };
 
   const copyZoomDetails = async () => {
@@ -51,14 +69,14 @@ export default function Home() {
     <div className="min-h-screen bg-ivory text-charcoal">
       <Navbar
         onCopyZoomDetails={copyZoomDetails}
-        onJoinZoom={joinZoom}
+        onJoinZoom={openZoomPasscodeModal}
         zoomActive={zoomActive}
       />
       <main>
         <Hero
           onCopyZoomDetails={copyZoomDetails}
           onGift={() => setGiftOpen(true)}
-          onJoinZoom={joinZoom}
+          onJoinZoom={openZoomPasscodeModal}
           zoomActive={zoomActive}
         />
         <Story />
@@ -74,6 +92,13 @@ export default function Home() {
         recipient={contactRecipient}
       />
       <GiftMessageModal open={giftOpen} onOpenChange={setGiftOpen} />
+      <ZoomPasscodeModal
+        open={zoomPasscodeOpen}
+        onOpenChange={setZoomPasscodeOpen}
+        meetingPasscode={zoomPasscode}
+        onCopyPasscode={copyZoomPasscode}
+        onJoinZoom={joinZoom}
+      />
       <ToastViewport />
       <BackToTop />
     </div>
